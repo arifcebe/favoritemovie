@@ -1,4 +1,4 @@
-package com.arifcebe.favoritmovie.ui;
+package com.arifcebe.favoritmovie.module;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;

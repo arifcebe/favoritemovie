@@ -1,4 +1,4 @@
-package com.arifcebe.favoritmovie.ui.main.adapter;
+package com.arifcebe.favoritmovie.module.main.adapter;
 
 /**
  * Created by arifcebe
