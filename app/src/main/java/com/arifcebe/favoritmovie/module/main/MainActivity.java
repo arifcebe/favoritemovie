@@ -34,8 +34,6 @@ public class MainActivity extends AppCompatActivity implements MainInterface {
     private GenreAdapter genreAdapter;
     private NewFilmAdapter movieAdapter;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,7 +54,6 @@ public class MainActivity extends AppCompatActivity implements MainInterface {
         genreAdapter = new GenreAdapter(this,genreList);
         recyclerViewGenre.setAdapter(genreAdapter);
 
-        AppProgressDialog.getInstance(this).showDialog(getString(R.string.load_data));
         presenter.fetchFavoriteMovie();
         presenter.fetchGenre();
     }
@@ -80,7 +77,6 @@ public class MainActivity extends AppCompatActivity implements MainInterface {
             genreList.add(g);
         }
         genreAdapter.notifyDataSetChanged();
-
     }
 
     @Override

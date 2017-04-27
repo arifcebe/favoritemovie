@@ -1,7 +1,6 @@
 package com.arifcebe.favoritmovie.module.main.presenter;
 
 import android.content.Context;
-import android.util.Log;
 
 import com.arifcebe.favoritmovie.base.AppLog;
 import com.arifcebe.favoritmovie.model.Genre;
@@ -48,16 +47,13 @@ public class MainPresenter {
             @Override
             public void onResponse(Call<MovieResponse> call, Response<MovieResponse> response) {
                 List<Movie> movies = response.body().getResults();
-                Log.d(TAG, "size movies " + movies.size());
-                //mainInterfaceView.onLoading(false);
+                stopLoader();
                 mainInterfaceView.successLoadFavoriteMovie(movies);
-                countService = countService + 1;
             }
 
             @Override
             public void onFailure(Call<MovieResponse> call, Throwable t) {
-                mainInterfaceView.onLoading(false);
-                Log.d(TAG, "failure connect " + t.toString());
+                stopLoader();
             }
         });
     }
@@ -68,24 +64,21 @@ public class MainPresenter {
         call.enqueue(new Callback<GenreResponse>() {
             @Override
             public void onResponse(Call<GenreResponse> call, Response<GenreResponse> response) {
-                AppLog.getInstance().showLog(TAG,"response genre "+response.body().toString());
-                //mainInterfaceView.onLoading(false);
+                stopLoader();
                 List<Genre> genreList = response.body().getGenres();
                 mainInterfaceView.successLoadGenre(genreList);
-                countService = countService + 1;
-                getCount();
             }
 
             @Override
             public void onFailure(Call<GenreResponse> call, Throwable t) {
                 AppLog.getInstance().showLog(TAG,"failer to get genre "+t.toString());
-                mainInterfaceView.onLoading(false);
+                stopLoader();
             }
         });
     }
 
-    private void getCount(){
-
+    private void stopLoader(){
+        countService = countService + 1;
         if(countService == 2){
             mainInterfaceView.onLoading(false);
         }
